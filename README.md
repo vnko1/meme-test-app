@@ -1,50 +1,50 @@
-# Vite & HeroUI Template
+# Meme Directory App
 
-This is a template for creating applications using Vite and HeroUI (v2).
+A simple React-based web application that displays a directory of popular memes
+using the [HeroUI](https://www.heroui.com) component library. The app allows
+users to view memes in both a **table** and a **card list**, and provides the
+ability to **edit meme properties** via a modal interface. Deployed on
+[Railway](https://railway.com).
 
-[Try it on CodeSandbox](https://githubbox.com/frontio-ai/vite-template)
+## 🧩 Features
 
-## Technologies Used
+- 🔄 Navigation between **Table View** and **List View** using `HeroUI.Navbar`
+- 🧾 Table View:
+  - Displays memes using `HeroUI.Table`
+  - Each meme has properties: `Id`, `Title`, `Image URL`, `Likes`
+  - Includes **Edit** action (via `HeroUI.Button`) that opens a `HeroUI.Modal`
+  - Modal allows inline editing with validation using `HeroUI.Input`,
+    `HeroUI.Dropdown`, etc.
+  - Data persists in browser cookies or localStorage
+- 🃏 List View:
+  - Displays memes in responsive `HeroUI.Card` components
+  - Each card shows meme `Image`, `Title`, `Likes`, and a link to the meme
+- 📱 Fully responsive and styled with **HeroUI default theme**
+- ☁️ Deployed on [Railway](https://railway.com) using their
+  [React deployment guide](https://docs.railway.app/guides/react)
 
-- [Vite](https://vitejs.dev/guide/)
-- [HeroUI](https://heroui.com)
-- [Tailwind CSS](https://tailwindcss.com)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org)
-- [Framer Motion](https://www.framer.com/motion)
+## 🛠 Tech Stack
 
-## How to Use
+- [React](https://reactjs.org/)
+- [HeroUI](https://www.heroui.com)
+- [Railway](https://railway.com)
+- [Strapi CMS](https://docs.strapi.io/cms/intro)
 
-To clone the project, run the following command:
+## 🖼 Meme Properties
 
-```bash
-git clone https://github.com/frontio-ai/vite-template.git
-```
+Each meme includes:
 
-### Install dependencies
+| Property | Type   | Notes                                                        |
+| -------- | ------ | ------------------------------------------------------------ |
+| `Id`     | number | Read-only, unique per meme                                   |
+| `Title`  | string | Required, 3-100 characters                                   |
+| `Image`  | URL    | Required, valid JPG image URL (e.g. `https://.../image.jpg`) |
+| `Likes`  | number | Integer 0-99, randomly generated                             |
 
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
+## 🚀 Getting Started
 
-```bash
-npm install
-```
-
-### Run the development server
-
-```bash
-npm run dev
-```
-
-### Setup pnpm (optional)
-
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
-
-```bash
-public-hoist-pattern[]=*@heroui/*
-```
-
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
-
-## License
-
-Licensed under the [MIT license](https://github.com/frontio-ai/vite-template/blob/main/LICENSE).
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/your-username/meme-directory
+   cd meme-directory
+   ```
