@@ -1,5 +1,5 @@
+/* eslint-disable no-console */
 import axios from "axios";
-import { setupCache } from "axios-cache-interceptor";
 
 import { MemeType } from "@/types";
 
