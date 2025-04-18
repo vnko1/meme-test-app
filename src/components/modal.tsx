@@ -6,18 +6,19 @@ import {
   ModalBody,
   ModalFooter,
   Button,
-  Input,
   Image,
 } from "@heroui/react";
 
-import { MemeType } from "@/types";
 import CustomForm from "./form";
+
+import { MemeType } from "@/types";
 
 interface Props {
   isOpen: boolean;
   onOpenChange: () => void;
   meme: MemeType | null;
   setCurrentMeme: React.Dispatch<React.SetStateAction<MemeType | null>>;
+  setMemes: React.Dispatch<React.SetStateAction<Array<MemeType>>>;
 }
 
 const CustomModal: React.FC<Props> = ({
@@ -25,11 +26,8 @@ const CustomModal: React.FC<Props> = ({
   onOpenChange,
   meme,
   setCurrentMeme,
+  setMemes,
 }) => {
-  const [title, setTitle] = useState(meme?.title);
-  const [likes, setLikes] = useState(meme?.likes);
-  const [url, setUrl] = useState("");
-
   return (
     <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
       <ModalContent>
@@ -39,13 +37,22 @@ const CustomModal: React.FC<Props> = ({
             onClose();
           };
 
+          const submitHandler = (meme: MemeType) => {
+            setMemes((state) =>
+              state.map((m) => (m.documentId === meme.documentId ? meme : m))
+            );
+            onClose();
+          };
+
           return (
             <>
-              <ModalHeader className="flex flex-col gap-1">{title}</ModalHeader>
+              <ModalHeader className="flex flex-col gap-1">
+                {meme?.title}
+              </ModalHeader>
               <ModalBody>
                 <Image alt={meme?.title} src={meme?.memeUrl} />
                 {meme && (
-                  <CustomForm meme={meme} submitHandler={() => onClose()} />
+                  <CustomForm meme={meme} submitHandler={submitHandler} />
                 )}
               </ModalBody>
               <ModalFooter>

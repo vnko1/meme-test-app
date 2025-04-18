@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Table,
   TableHeader,
@@ -14,11 +14,11 @@ import Loader from "./loader";
 import { EditIcon } from "./icons";
 
 import { MemeType } from "@/types";
-import { api } from "@/api";
 
 interface Props {
   setCurrentMeme: React.Dispatch<React.SetStateAction<MemeType | null>>;
   onOpen: () => void;
+  memes: Array<MemeType>;
 }
 
 export const columns = [
@@ -28,15 +28,7 @@ export const columns = [
   { name: "ACTIONS", uid: "actions" },
 ];
 
-const CustomTable: React.FC<Props> = ({ onOpen, setCurrentMeme }) => {
-  const [memes, setMemes] = useState<Array<MemeType>>([]);
-
-  useEffect(() => {
-    api.getMemes().then((res) => {
-      if (res?.data) setMemes(res.data);
-    });
-  }, []);
-
+const CustomTable: React.FC<Props> = ({ onOpen, setCurrentMeme, memes }) => {
   const renderCell = React.useCallback(
     (meme: MemeType, columnKey: React.Key) => {
       const cellValue = meme[columnKey as keyof MemeType] as React.ReactNode;

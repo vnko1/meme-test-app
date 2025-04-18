@@ -1,17 +1,26 @@
 import axios from "axios";
+import { setupCache } from "axios-cache-interceptor";
 
 import { MemeType } from "@/types";
 
-const apiInstance = axios.create({
+const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
 });
 
 export const api = {
   getMemes: async () => {
     try {
-      const response = await apiInstance<{ data: Array<MemeType> }>("/memes");
+      return axiosInstance<{ data: Array<MemeType> }>("/memes", {
+        params: { sort: { id: "desc" } },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  },
 
-      return response.data;
+  updateMeme: async (id: string, meme: unknown) => {
+    try {
+      return axiosInstance.put(`/memes/${id}`, { data: meme });
     } catch (error) {
       console.error(error);
     }
