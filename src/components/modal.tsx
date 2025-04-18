@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Modal,
   ModalContent,
@@ -6,9 +6,12 @@ import {
   ModalBody,
   ModalFooter,
   Button,
+  Input,
+  Image,
 } from "@heroui/react";
 
 import { MemeType } from "@/types";
+import CustomForm from "./form";
 
 interface Props {
   isOpen: boolean;
@@ -23,7 +26,9 @@ const CustomModal: React.FC<Props> = ({
   meme,
   setCurrentMeme,
 }) => {
-  console.log("🚀 ~ meme:", meme);
+  const [title, setTitle] = useState(meme?.title);
+  const [likes, setLikes] = useState(meme?.likes);
+  const [url, setUrl] = useState("");
 
   return (
     <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
@@ -36,35 +41,16 @@ const CustomModal: React.FC<Props> = ({
 
           return (
             <>
-              <ModalHeader className="flex flex-col gap-1">
-                Modal Title
-              </ModalHeader>
+              <ModalHeader className="flex flex-col gap-1">{title}</ModalHeader>
               <ModalBody>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar risus non risus hendrerit venenatis.
-                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar risus non risus hendrerit venenatis.
-                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
-                <p>
-                  Magna exercitation reprehenderit magna aute tempor cupidatat
-                  consequat elit dolor adipisicing. Mollit dolor eiusmod sunt ex
-                  incididunt cillum quis. Velit duis sit officia eiusmod Lorem
-                  aliqua enim laboris do dolor eiusmod. Et mollit incididunt
-                  nisi consectetur esse laborum eiusmod pariatur proident Lorem
-                  eiusmod et. Culpa deserunt nostrud ad veniam.
-                </p>
+                <Image alt={meme?.title} src={meme?.memeUrl} />
+                {meme && (
+                  <CustomForm meme={meme} submitHandler={() => onClose()} />
+                )}
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="light" onPress={handleClos}>
                   Close
-                </Button>
-                <Button color="primary" onPress={handleClos}>
-                  Save
                 </Button>
               </ModalFooter>
             </>

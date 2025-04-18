@@ -9,10 +9,7 @@ const apiInstance = axios.create({
 export const api = {
   getMemes: async () => {
     try {
-      const response = await apiInstance<{ data: Array<MemeType> }>(
-        "/memes",
-        { params: { populate: { image: { fields: ["url"] } } } }
-      );
+      const response = await apiInstance<{ data: Array<MemeType> }>("/memes");
 
       return response.data;
     } catch (error) {

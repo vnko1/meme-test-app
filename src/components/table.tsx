@@ -36,6 +36,7 @@ const CustomTable: React.FC<Props> = ({ onOpen, setCurrentMeme }) => {
       if (res?.data) setMemes(res.data);
     });
   }, []);
+
   const renderCell = React.useCallback(
     (meme: MemeType, columnKey: React.Key) => {
       const cellValue = meme[columnKey as keyof MemeType] as React.ReactNode;
@@ -45,7 +46,7 @@ const CustomTable: React.FC<Props> = ({ onOpen, setCurrentMeme }) => {
           return (
             <div className="flex flex-col">
               <Link
-                href={meme.image.url}
+                href={meme.memeUrl}
                 rel="noreferrer noopener"
                 target="_blank"
               >

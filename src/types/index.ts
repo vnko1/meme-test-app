@@ -17,5 +17,6 @@ export interface ImageType extends UIDType {
 export interface MemeType extends UIDType {
   title: string;
   likes: number;
-  image: ImageType;
+  image: ImageType | null;
+  memeUrl: string;
 }
